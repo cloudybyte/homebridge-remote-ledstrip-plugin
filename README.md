@@ -1,30 +1,22 @@
-# homebridge-gpio-rgb-ledstrip
-
-[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
-[![npm version](https://badge.fury.io/js/homebridge-gpio-rgb-ledstrip.svg)](https://badge.fury.io/js/homebridge-gpio-rgb-ledstrip)
-![npm](https://img.shields.io/npm/dw/homebridge-gpio-rgb-ledstrip)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=KLP7YU6F9HHTY)
-
-[RPi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge)
-
-Due to all the changes and updated that have occured in Homebridge since the original release of this plugin, i decided to replace its core to extend its usability and compatibility.
-This plugin now relies on pi-blaster.js which you need to install beforehand.
+# homebridge-rgb-ledstrip
 
 
-Originally inspired by [GiniaE/homebridge-gpio-ledstrip](https://github.com/GiniaE/homebridge-gpio-ledstrip)
+[![Donate](https://img.shields.io/badge/Donate-Buy_Me_a_Coffee-green.svg)](https://www.buymeacoffee.com/misi)
+
+[Raspberry Pi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge)
+
+Originally inspired by [GiniaE/homebridge-gpio-ledstrip](https://github.com/GiniaE/homebridge-gpio-ledstrip) and [manfredipist/homebridge-gpio-rgb-ledstrip](https://github.com/manfredipist/homebridge-gpio-rgb-ledstrip)
 
 # Installation
 
-1. Install [pi-blaster](https://github.com/sarfata/pi-blaster).
-2. Update pi-blaster DAEMON_OPTS configuration under the path /etc/default/pi-blaster to enable your specific pin layout ([instructions](https://github.com/sarfata/pi-blaster#warnings-and-other-caveats)).
-3. Install [homebridge-gpio-rgb-ledstrip] directly from Homebridge Plugin Page or by running sudo npm install -g homebridge-gpio-rgb-ledstrip.
-4. Update your configuration file. See sample config.json snippet below. Remember to use BCM GPIO layout.
+1.	Install Homebridge using `npm install -g homebridge`
+2.	Install this plugin `npm install -g homebridge-pwm-fan`
+3.	Run `sudo pigpiod` after installing [the pigpio library](http://abyz.co.uk/rpi/pigpio/) and Python
+4. Optionally install [Homebridge Config UI X](https://github.com/oznu/homebridge-config-ui-x)
 
-To identify the correct pin configuration, have a look at the following layout
+# Hardware
 
-![pi-blaster pinout](https://github.com/manfredipist/homebridge-gpio-rgb-ledstrip/blob/master/images/pinout.xyz.png?raw=true)
-
-P.S: if pi-blaster seems not to work (e.g running the command 'echo "$PIN=1" > /dev/pi-blaster' doesn't yield the desired output), try restarting manually the service with root privileges
+Follow [David Ordnung's tutorial](https://dordnung.de/raspberrypi-ledstrip/) on how to connect your LED Strip to the Rapsberry Pi's GPIO pins.
 
 # Configuration
 
@@ -33,19 +25,27 @@ Configuration sample:
  ```
     "accessories": [
       {
-        "accessory": "SmartLedStrip",
-        "name": "Bedroom LedStrip",
-        "rPin": 22,
-        "gPin": 27,
-        "bPin": 17
+        "accessory": "RgbLedStrip",
+        "name": "Bedroom LED Strip",
+        "rPin": 17,
+        "gPin": 22,
+        "bPin": 24
       }
     ]
 ```
 
 Fields:
 
-* "accessory": Must always be "SmartLedStrip" (required)
+* "accessory": Must always be "RgbLedStrip" (required)
 * "name": Can be anything (required)
 * "rPin": GPIO pin that is used to set red value (required)
 * "gPin": GPIO pin that is used to set green value (required)
 * "bPin": GPIO pin that is used to set blue value (required)
+
+## Contributing
+
+Feel free to open an issue (or even better, send a Pull Request) to contribute. Contributions are always welcomed! 😄
+
+<a href="https://www.buymeacoffee.com/misi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+Please consider donating. 🙏

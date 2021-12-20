@@ -19,7 +19,7 @@ function RgbLedStripAccessory(log, config) {
   this.name     = config['name'];
 
   this.helper = null;
-  this.helperPath = path.join(__dirname, 'pwmhelper.py'); 
+  this.helperPath = path.join(__dirname, 'pwmhelper.py');
 
   this.rPin     = config['rPin'];
   this.gPin     = config['gPin'];
@@ -128,12 +128,12 @@ RgbLedStripAccessory.prototype = {
       }
 
       this.helper = child_process.spawn('python', ['-u', this.helperPath, this.rPin, this.gPin, this.bPin, red, green, blue]);
-	  
+
       this.helper.stderr.on('data', (err) => {
-          this.log("Couldn't set RGB values: $err);
+          this.log("Couldn't set RGB values: $err");
           throw new Error(`pwmhelper error: ${err}`);
       });
-	  
+  
       this.log("Setting RGB values to: Red: "+red + " Green: "+green+ " Blue: "+blue);
   }
 }

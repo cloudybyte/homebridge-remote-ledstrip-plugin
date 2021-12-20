@@ -2,20 +2,24 @@
 
 var Service, Characteristic;
 
-const piblaster = require('pi-blaster.js');
+const child_process = require('child_process');
 const converter = require('color-convert');
+const path = require('path');
 const fs = require('fs');
 
 module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 
-	homebridge.registerAccessory('homebridge-gpio-rgb-ledstrip', 'SmartLedStrip', SmartLedStripAccessory);
+	homebridge.registerAccessory('homebridge-rgb-ledstrip', 'RgbLedStrip', RgbLedStripAccessory);
 }
 
-function SmartLedStripAccessory(log, config) {
+function RgbLedStripAccessory(log, config) {
   this.log      = log;
   this.name     = config['name'];
+
+  this.helper = null;
+  this.helperPath = path.join(__dirname, 'pwmhelper.py'); 
 
   this.rPin     = config['rPin'];
   this.gPin     = config['gPin'];
@@ -30,17 +34,15 @@ function SmartLedStripAccessory(log, config) {
       throw new Error("gPin not set!")
     if (!this.bPin)
       throw new Error("bPin not set!")
-    if (!fs.existsSync('/dev/pi-blaster'))
-      throw new Error("/dev/pi-blaster does not exist!")
   } catch (err) {
     this.log("An error has been thrown! " + err);
-    this.log("homebridge-gpio-rgb-ledstrip won't work until you fix this problem");
+    this.log("homebridge-rgb-ledstrip won't work until you fix this problem");
     this.enabled = false;
   }
 
 }
 
-SmartLedStripAccessory.prototype = {
+RgbLedStripAccessory.prototype = {
 
   getServices : function(){
 
@@ -48,55 +50,55 @@ SmartLedStripAccessory.prototype = {
       let informationService = new Service.AccessoryInformation();
 
       informationService
-      .setCharacteristic(Characteristic.Manufacturer, 'Manfredi Pistone')
-      .setCharacteristic(Characteristic.Model, 'GPIO-RGB-LedStrip')
+      .setCharacteristic(Characteristic.Manufacturer, 'misi')
+      .setCharacteristic(Characteristic.Model, 'RGB-LedStrip')
       .setCharacteristic(Characteristic.SerialNumber, '06-06-00');
 
-      let smartLedStripService = new Service.Lightbulb(this.name);
+      let rgbLedStripService = new Service.Lightbulb(this.name);
 
-      smartLedStripService
+      rgbLedStripService
           .getCharacteristic(Characteristic.On)
           .on('change',this.toggleState.bind(this));
 
-      smartLedStripService
+      rgbLedStripService
           .addCharacteristic(new Characteristic.Brightness())
           .on('change',this.toggleState.bind(this));
 
-      smartLedStripService
+      rgbLedStripService
           .addCharacteristic(new Characteristic.Hue())
           .on('change',this.toggleState.bind(this));
 
-      smartLedStripService
+      rgbLedStripService
           .addCharacteristic(new Characteristic.Saturation())
           .on('change',this.toggleState.bind(this));
 
       this.informationService = informationService;
-      this.smartLedStripService = smartLedStripService;
+      this.rgbLedStripService = rgbLedStripService;
 
-      this.log("SmartLedStrip has been successfully initialized!");
+      this.log("RGB LED Strip has been successfully initialized!");
 
-      return [informationService, smartLedStripService];
+      return [informationService, rgbLedStripService];
     }else{
-      this.log("SmartLedStrip has not been initialized, please check your logs..");
+      this.log("RGB LED Strip has not been initialized, please check your logs..");
       return [];
     }
 
   },
 
   isOn : function() {
-      return this.smartLedStripService.getCharacteristic(Characteristic.On).value;
+      return this.rgbLedStripService.getCharacteristic(Characteristic.On).value;
   },
 
   getBrightness : function(){
-    return this.smartLedStripService.getCharacteristic(Characteristic.Brightness).value;
+    return this.rgbLedStripService.getCharacteristic(Characteristic.Brightness).value;
   },
 
   getHue : function(){
-    return this.smartLedStripService.getCharacteristic(Characteristic.Hue).value;
+    return this.rgbLedStripService.getCharacteristic(Characteristic.Hue).value;
   },
 
   getSaturation : function(){
-    return this.smartLedStripService.getCharacteristic(Characteristic.Saturation).value;
+    return this.rgbLedStripService.getCharacteristic(Characteristic.Saturation).value;
   },
 
   toggleState : function()
@@ -120,10 +122,18 @@ SmartLedStripAccessory.prototype = {
 
   updateRGB : function(red, green, blue)
   {
-      this.log("Setting rgb values to: Red: "+red + " Green: "+green+ " Blue: "+blue);
-      piblaster.setPwm(this.rPin, red/255);
-      piblaster.setPwm(this.gPin, green/255);
-      piblaster.setPwm(this.bPin, blue/255);
-  }
+      if (this.helper) {
+          this.helper.kill();
+          // TODO: more cleanup needed?
+      }
 
+      this.helper = child_process.spawn('python', ['-u', this.helperPath, this.rPin, this.gPin, this.bPin, red, green, blue]);
+	  
+      this.helper.stderr.on('data', (err) => {
+          this.log("Couldn't set RGB values: $err);
+          throw new Error(`pwmhelper error: ${err}`);
+      });
+	  
+      this.log("Setting RGB values to: Red: "+red + " Green: "+green+ " Blue: "+blue);
+  }
 }

@@ -1,8 +1,8 @@
 {
-    "pluginAlias": "SmartLedStrip",
+    "pluginAlias": "RgbLedStrip",
     "pluginType": "accessory",
-    "headerDisplay": "[RPi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge).",
-    "footerDisplay": "Raise [Issues](https://github.com/manfredipist/homebridge-gpio-rgb-ledstrip/issues) or submit [Pull Requests](https://github.com/manfredipist/homebridge-gpio-rgb-ledstrip/pulls) on [Project Page](https://github.com/manfredipist/homebridge-gpio-rgb-ledstrip).",
+    "headerDisplay": "[Raspberry Pi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge).",
+    "footerDisplay": "Raise [Issues](https://github.com/suhajda3/homebridge-rgb-ledstrip/issues) or submit [Pull Requests](https://github.com/suhajda3/homebridge-rgb-ledstrip/pulls) on [Project Page](https://github.com/suhajda3/homebridge-rgb-ledstrip).",
     "schema": {
         "type": "object",
         "properties": {
@@ -10,7 +10,7 @@
                 "title": "Name",
                 "type": "string",
                 "required": true,
-                "default": "SmartLedStrip",
+                "default": "LED Strip",
                 "description": "A unique name for the accessory. It will be used as the accessory name in HomeKit."
             },
             "rPin": {

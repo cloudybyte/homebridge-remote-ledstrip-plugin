@@ -1,6 +1,7 @@
 {
     "pluginAlias": "RgbLedStrip",
     "pluginType": "accessory",
+    "singular": true,
     "headerDisplay": "[Raspberry Pi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge).",
     "footerDisplay": "Raise [Issues](https://github.com/suhajda3/homebridge-rgb-ledstrip/issues) or submit [Pull Requests](https://github.com/suhajda3/homebridge-rgb-ledstrip/pulls) on [Project Page](https://github.com/suhajda3/homebridge-rgb-ledstrip).",
     "schema": {

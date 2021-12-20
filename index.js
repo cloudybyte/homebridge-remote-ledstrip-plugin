@@ -75,11 +75,11 @@ RgbLedStripAccessory.prototype = {
       this.informationService = informationService;
       this.rgbLedStripService = rgbLedStripService;
 
-      this.log("RGB LED Strip has been successfully initialized!");
+      this.log("RgbLedStrip has been successfully initialized!");
 
       return [informationService, rgbLedStripService];
     }else{
-      this.log("RGB LED Strip has not been initialized, please check your logs..");
+      this.log("RgbLedStrip has not been initialized, please check your logs.");
       return [];
     }
 

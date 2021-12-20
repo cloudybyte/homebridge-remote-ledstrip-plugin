@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0 (2021-12-20)
+-	**MISC**: Replaced pi-blaster with pigpio
+-	**MISC**: Minor bugfixes
+
 ## 0.1.2 (2020-12-04)
 -	**MISC**: Added "verified by homebridge" badge and donate button
 

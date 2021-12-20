@@ -1,6 +1,7 @@
 # homebridge-rgb-ledstrip
 
-
+[![npm version](https://badge.fury.io/js/homebridge-rgb-ledstrip.svg)](https://badge.fury.io/js/homebridge-rgb-ledstrip)
+![npm](https://img.shields.io/npm/dw/homebridge-rgb-ledstrip)
 [![Donate](https://img.shields.io/badge/Donate-Buy_Me_a_Coffee-green.svg)](https://www.buymeacoffee.com/misi)
 
 [Raspberry Pi](https://www.raspberrypi.org) GPIO based LED Strip plugin for [Homebridge](https://github.com/nfarina/homebridge)

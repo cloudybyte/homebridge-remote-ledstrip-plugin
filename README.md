@@ -12,7 +12,7 @@ Originally inspired by [GiniaE/homebridge-gpio-ledstrip](https://github.com/Gini
 
 1.	Install Homebridge using `npm install -g homebridge`
 2.	Install this plugin `npm install -g homebridge-rgb-ledstrip`
-3.	Run `sudo pigpiod` after installing [the pigpio library](http://abyz.me.uk/rpi/pigpio/) and Python
+3.	Run `sudo pigpiod` after installing [the pigpio library](https://abyz.me.uk/rpi/pigpio/) and Python
 4. Optionally install [Homebridge Config UI X](https://github.com/oznu/homebridge-config-ui-x)
 
 # Hardware

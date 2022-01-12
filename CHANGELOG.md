@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2022-01-12)
+-	**MISC**: Added "Verified by Homebridge" badge and updated donate button
+-	**MISC**: Fixed a typo in README.ms
+
 ## 1.0.0 (2021-12-20)
 -	**MISC**: Replaced pi-blaster with pigpio
 -	**MISC**: Minor bugfixes

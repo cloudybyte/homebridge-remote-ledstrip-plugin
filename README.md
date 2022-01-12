@@ -1,5 +1,6 @@
 # homebridge-rgb-ledstrip
 
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
 [![npm version](https://badge.fury.io/js/homebridge-rgb-ledstrip.svg)](https://badge.fury.io/js/homebridge-rgb-ledstrip)
 ![npm](https://img.shields.io/npm/dw/homebridge-rgb-ledstrip)
 [![Donate](https://img.shields.io/badge/Donate-Buy_Me_a_Coffee-green.svg)](https://www.buymeacoffee.com/misi)

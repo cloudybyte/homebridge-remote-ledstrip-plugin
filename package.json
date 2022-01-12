@@ -15,7 +15,10 @@
   "bugs": {
     "url": "https://github.com/suhajda3/homebridge-rgb-ledstrip/issues"
   },
-  "funding": "https://www.buymeacoffee.com/misi",
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://www.buymeacoffee.com/misi"
+  },
   "homepage": "https://github.com/suhajda3/homebridge-rgb-ledstrip#readme",
   "keywords": [
     "homebridge-plugin",

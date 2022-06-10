@@ -1,8 +1,8 @@
 {
-  "name": "homebridge-rgb-ledstrip",
-  "description": "Raspberry Pi GPIO based LED Strip plugin for Homebridge",
+  "name": "homebridge-remote-ledstrip-plugin",
+  "description": "Raspberry Pi GPIO based analog LED Strip plugin for Homebridge",
   "version": "1.0.1",
-  "author": "misi",
+  "author": "cloudybyte",
   "license": "GPL-3.0-only",
   "main": "index.js",
   "scripts": {
@@ -10,16 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/suhajda3/homebridge-rgb-ledstrip.git"
+    "url": "git://github.com/cloudybyte/homebridge-remote-ledstrip-plugin.git"
   },
   "bugs": {
-    "url": "https://github.com/suhajda3/homebridge-rgb-ledstrip/issues"
+    "url": "https://github.com/cloudybyte/homebridge-remote-ledstrip-plugin/issues"
   },
-  "funding": {
-    "type": "buymeacoffee",
-    "url": "https://www.buymeacoffee.com/misi"
-  },
-  "homepage": "https://github.com/suhajda3/homebridge-rgb-ledstrip#readme",
+  "homepage": "https://github.com/cloudybyte/homebridge-remote-ledstrip-plugin#readme",
   "keywords": [
     "homebridge-plugin",
     "gpio rgb ledstrip",

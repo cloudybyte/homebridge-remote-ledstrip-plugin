@@ -11,19 +11,17 @@ module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 
-	homebridge.registerAccessory('homebridge-rgb-ledstrip', 'RgbLedStrip', RgbLedStripAccessory);
+	homebridge.registerAccessory('homebridge-remote-ledstrip-plugin', 'RemoteLedStrip', RgbLedStripAccessory);
 }
 
 function RgbLedStripAccessory(log, config) {
   this.log      = log;
   this.name     = config['name'];
 
-  this.helper = null;
-  this.helperPath = path.join(__dirname, 'pwmhelper.py');
-
-  this.rPin     = config['rPin'];
-  this.gPin     = config['gPin'];
-  this.bPin     = config['bPin'];
+  this.rPin       = config['rPin'];
+  this.gPin       = config['gPin'];
+  this.bPin       = config['bPin'];
+  this.ledSlaveIP = config['led-slave'];
 
   this.enabled = true ;
 
@@ -34,6 +32,8 @@ function RgbLedStripAccessory(log, config) {
       throw new Error("gPin not set!")
     if (!this.bPin)
       throw new Error("bPin not set!")
+    if (!this.ledSlaveIP)
+      throw new Error("Slave IP not set!")
   } catch (err) {
     this.log("An error has been thrown! " + err);
     this.log("homebridge-rgb-ledstrip won't work until you fix this problem");
@@ -127,13 +127,15 @@ RgbLedStripAccessory.prototype = {
           // TODO: more cleanup needed?
       }
 
-      this.helper = child_process.spawn('python', ['-u', this.helperPath, this.rPin, this.gPin, this.bPin, red, green, blue]);
+      this.helper = fetch("http://" + this.ledSlaveIP + "/setBrightness", {method: "POST", body: JSON.stringify({r: red, g: green, b: blue})})
+
+      //this.helper = child_process.spawn('python', ['-u', this.helperPath, this.rPin, this.gPin, this.bPin, red, green, blue]);
 
       this.helper.stderr.on('data', (err) => {
           this.log("Couldn't set RGB values: $err");
           throw new Error(`pwmhelper error: ${err}`);
       });
   
-      this.log("Setting RGB values to: Red: "+red + " Green: "+green+ " Blue: "+blue);
+      this.log("Setting RGB values to: Red: " + red + " Green: " + green + " Blue: " + blue);
   }
 }

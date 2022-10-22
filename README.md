@@ -1,4 +1,7 @@
-# homebridge-remote-ledstrip-plugin
+# Notice: This repo is unmaintained, I have switched to a custom solution using [HomeSpan](https://github.com/HomeSpan/HomeSpan), due to Homebridge not being able to pair.
+
+
+## homebridge-remote-ledstrip-plugin
 
 [![npm version](https://badge.fury.io/js/homebridge-remote-ledstrip-plugin.svg)](https://badge.fury.io/js/homebridge-remote-ledstrip-plugin)
 ![npm](https://img.shields.io/npm/dw/homebridge-remote-ledstrip-plugin)
